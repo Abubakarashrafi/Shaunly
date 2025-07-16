@@ -9,7 +9,7 @@ const ShapeControls = ({
   addShape
 }) => {
   return (
-    <div className="flex-1 overflow-auto space-y-3 pr-1 relative">
+    <div className="flex-1 overflow-y-auto space-y-3 pr-1 relative max-h-[50vh] md:max-h-none">
       <AnimatePresence>
         {shapes.map((sh, index) => {
           const isSelected = index === selectedShape;
@@ -24,12 +24,10 @@ const ShapeControls = ({
                 rotate: -15,
                 transition: { duration: 0.3, ease: "easeInOut" },
               }}
-
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               onClick={() => setSelectedShape(index)}
               className="relative cursor-pointer"
             >
-              {/* Animated Background Highlight */}
               {isSelected && (
                 <motion.div
                   layoutId="highlight"
@@ -38,19 +36,20 @@ const ShapeControls = ({
                 />
               )}
 
-              <div className="relative z-10 flex items-center justify-between text-base h-[4.25rem] px-4 rounded-lg">
-                <p className="text-lg">{sh.label}</p>
-                <motion.div
-                  whileHover={{ scale: 1.15, backgroundColor: "#fff" }}
+              <div className="relative z-10 flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 rounded-lg">
+                <p className="text-sm sm:text-base">{sh.label}</p>
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => {
                     e.stopPropagation();
                     removeShape(index);
                   }}
-                  className="hover:text-red-600 w-12 h-12 rounded-md flex items-center justify-center"
+                  className="hover:text-red-600 w-8 h-8 rounded-md flex items-center justify-center"
+                  aria-label="Delete shape"
                 >
-                  <Trash2 />
-                </motion.div>
+                  <Trash2 className="w-5 h-5" />
+                </motion.button>
               </div>
             </motion.div>
           );
@@ -59,12 +58,13 @@ const ShapeControls = ({
 
       <motion.button
         onClick={addShape}
-      
         whileTap={{ scale: 0.95 }}
-        className="mt-2 w-full py-1 bg-black text-white rounded-md hover:bg-slate-800 text-xl"
+        className="mt-2 w-full py-1.5 bg-black text-white rounded-md hover:bg-slate-800 text-sm sm:text-base flex items-center justify-center gap-1"
       >
-        <span className="text-3xl">+</span> Add Shape
+        <span className="text-lg font-semibold">+</span>
+        <span>Add Shape</span>
       </motion.button>
+
     </div>
   );
 };

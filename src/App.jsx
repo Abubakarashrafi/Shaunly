@@ -1,18 +1,13 @@
-
-import GlowEditor from './components/GlowEditor.jsx'
-
+import GlowEditor from "./components/GlowEditor.jsx";
 
 function App() {
-  
-
   return (
     <>
-    <div className='min-h-screen'>
-
-     <GlowEditor/>
-    </div>
-    </>  
-  )
+      <div className="min-h-screen">
+        <GlowEditor />
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;

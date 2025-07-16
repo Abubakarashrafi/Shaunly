@@ -1,4 +1,3 @@
-// ShadowControls.jsx
 import Input from "../ui/Input";
 import ColorPicker from "../ui/ColorPicker";
 import { Trash2 } from "lucide-react";
@@ -9,24 +8,26 @@ const ShadowControls = ({
     shape,
     selectedShape,
     addShadow,
-    removeShadow
+    removeShadow,
 }) => {
-
-
     return (
-        <div className="flex-1 space-y-3 mt-2">
+        <div className="flex-1 space-y-4 mt-2">
             {shape[selectedShape]?.shadows.map((sh, index) => (
-                <div key={index} className="border p-4">
-                    <div className="flex justify-between mb-4 items-center">
-                        <p className="text-lg font-semibold">Shadow {index + 1}</p>
-                        <div
-                            onClick={() => {
-                               removeShadow(selectedShape,index)
-                            }}
-                            className="hover:bg-blue-50 cursor-pointer hover:text-red-600 w-12 h-12 rounded-md flex items-center justify-center"
+                <div
+                    key={index}
+                    className="border rounded-md p-4 space-y-3 sm:space-y-4"
+                >
+                    <div className="flex items-center justify-between mb-2 sm:mb-4">
+                        <p className="text-base sm:text-lg font-semibold">
+                            Shadow {index + 1}
+                        </p>
+                        <button
+                            onClick={() => removeShadow(selectedShape, index)}
+                            className="hover:bg-blue-50 hover:text-red-600 text-gray-600 w-10 h-10 sm:w-12 sm:h-12 rounded-md flex items-center justify-center"
+                            aria-label="Remove shadow"
                         >
-                            <Trash2 />
-                        </div>
+                            <Trash2 className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </button>
                     </div>
 
                     {[
@@ -44,21 +45,24 @@ const ShadowControls = ({
                             max={max}
                             step={step}
                             value={sh[key]}
-                            onChange={(e) => updateShadow(key, e.target.value, selectedShape, index)}
+                            onChange={(e) =>
+                                updateShadow(key, e.target.value, selectedShape, index)
+                            }
                         />
                     ))}
 
-                    <ColorPicker label="Color" value={sh.color}
-                        onChange={(e) => updateShadow("color", e.target.value, selectedShape, index)} />
+                    <ColorPicker
+                        label="Color"
+                        value={sh.color}
+                        onChange={(e) =>
+                            updateShadow("color", e.target.value, selectedShape, index)
+                        }
+                    />
                 </div>
             ))}
 
-            <Button
-                onClick={ 
-                 ()=>addShadow(selectedShape)
-                }
-                  >
-                <span className="text-3xl">+</span> Add Shadow
+            <Button onClick={() => addShadow(selectedShape)}>
+                <span className="text-xl sm:text-2xl">+</span> Add Shadow
             </Button>
         </div>
     );

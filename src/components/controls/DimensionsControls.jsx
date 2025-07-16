@@ -7,6 +7,7 @@ const DimensionsControls = ({ shape, selectedShape, updateShape }) => {
       {["width", "height"].map((key) => (
       
           <Input
+          key={key}
             label={key.charAt(0).toUpperCase() + key.slice(1)}
             value={shape[selectedShape]?.[key]}
             type="range"

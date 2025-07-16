@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const CanvasPreview = ({ shape, setShape, setSelectedShape }) => {
     return (
-        <div className="flex my-32 px-20 gap-x-10 flex-wrap mix-blend-screen">
+        <div className="flex flex-1  my-32 px-20 gap-x-10 flex-wrap mix-blend-screen">
             {shape.map((item, index) => (
                 <motion.div
                     key={item.label + index}
